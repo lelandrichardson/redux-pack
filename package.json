@@ -1,0 +1,32 @@
+{
+  "name": "redux-pack",
+  "version": "0.1.0",
+  "description": "Sensible promise handling and middleware for redux",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lelandrichardson/redux-pack.git"
+  },
+  "keywords": [
+    "redux",
+    "middleware",
+    "promise",
+    "async",
+    "normalize",
+    "normalizr",
+    "react"
+  ],
+  "author": "Leland Richardson <leland.m.richardson@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lelandrichardson/redux-pack/issues"
+  },
+  "homepage": "https://github.com/lelandrichardson/redux-pack#readme",
+  "peerDependencies": {
+    "redux": "*",
+    "normalizr": "*"
+  }
+}
