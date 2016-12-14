@@ -37,30 +37,6 @@
     "no-console": 0,
     // Disable `arrow-parens` because it conflicts with Flow.
     "arrow-parens": 0,
-    // Do not enforce component method order
-    "no-restricted-properties": [2, {
-      "object": "arguments",
-      "property": "callee",
-      "message": "arguments.callee is deprecated,"
-    }, {
-      "property": "__defineGetter__",
-      "message": "Please use Object.defineProperty instead.",
-    }, {
-      "property": "__defineSetter__",
-      "message": "Please use Object.defineProperty instead.",
-    }, {
-      "object": "NativeModules",
-      "message": "Use require('react-native-safe-module').module(...) instead."
-    }, {
-      "object": "requireNativeComponent",
-      "message": "Use require('react-native-safe-module').component(...) instead."
-    }, {
-      "property": "NativeModules",
-      "message": "Use require('react-native-safe-module').module(...) instead."
-    }, {
-      "property": "requireNativeComponent",
-      "message": "Use require('react-native-safe-module').component(...) instead."
-    }],
     "prefer-object-spread/prefer-object-spread": 2
   },
   "globals": {
