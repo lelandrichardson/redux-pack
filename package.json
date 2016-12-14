@@ -2,9 +2,12 @@
   "name": "redux-pack",
   "version": "0.1.0",
   "description": "Sensible promise handling and middleware for redux",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "mocha"
+    "prepublish": "npm run build",
+    "test": "npm run lint",
+    "lint": "eslint ./",
+    "build": "babel src --out-dir lib"
   },
   "repository": {
     "type": "git",
@@ -28,5 +31,22 @@
   "peerDependencies": {
     "redux": "*",
     "normalizr": "*"
+  },
+  "dependencies": {
+    "deline": "^1.0.2",
+    "invariant": "^2.2.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.20.0",
+    "babel-eslint": "^6.1.0",
+    "babel-preset-react-native": "^1.9.0",
+    "eslint": "^3.11.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-flowtype": "^2.3.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-prefer-object-spread": "^1.0.0",
+    "normalizr": "^2.3.0",
+    "redux": "^3.6.0"
   }
 }

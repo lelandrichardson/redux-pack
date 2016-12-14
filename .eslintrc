@@ -1,0 +1,69 @@
+{
+  "root": true,
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "node": true
+  },
+  "plugins": [
+    "prefer-object-spread"
+  ],
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "blockBindings": true,
+    "classes": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "forOf": true,
+    "generators": false,
+    "modules": true,
+    "experimentalObjectRestSpread": true,
+    "objectLiteralComputedProperties": true,
+    "objectLiteralDuplicateProperties": false,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "restParams": true,
+    "spread": true,
+    "superInFunctions": true,
+    "templateStrings": true
+  },
+  "rules": {
+    "new-cap": 0,
+    "no-use-before-define": 0,
+    "arrow-body-style": 0,
+    // triple equals is required except for when comparing with null
+    "eqeqeq": [2, "allow-null"],
+    // Allow console methods, which get removed during build process
+    "no-console": 0,
+    // Disable `arrow-parens` because it conflicts with Flow.
+    "arrow-parens": 0,
+    // Do not enforce component method order
+    "no-restricted-properties": [2, {
+      "object": "arguments",
+      "property": "callee",
+      "message": "arguments.callee is deprecated,"
+    }, {
+      "property": "__defineGetter__",
+      "message": "Please use Object.defineProperty instead.",
+    }, {
+      "property": "__defineSetter__",
+      "message": "Please use Object.defineProperty instead.",
+    }, {
+      "object": "NativeModules",
+      "message": "Use require('react-native-safe-module').module(...) instead."
+    }, {
+      "object": "requireNativeComponent",
+      "message": "Use require('react-native-safe-module').component(...) instead."
+    }, {
+      "property": "NativeModules",
+      "message": "Use require('react-native-safe-module').module(...) instead."
+    }, {
+      "property": "requireNativeComponent",
+      "message": "Use require('react-native-safe-module').component(...) instead."
+    }],
+    "prefer-object-spread/prefer-object-spread": 2
+  },
+  "globals": {
+    "__DEV__": true
+  }
+}

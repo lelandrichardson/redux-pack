@@ -1,5 +1,10 @@
+import { KEY, LIFECYCLE } from './constants';
+import middleware from './middleware';
+import handle from './handle';
+
 module.exports = {
-  createInjectableStore: require('./createInjectableStore'),
-  middleware: require('./middleware'),
-  handle: require('./handle'),
+  middleware,
+  handle,
+  KEY,
+  LIFECYCLE,
 };
