@@ -135,5 +135,3 @@ export function loadFoo(id) {
   };
 }
 ```
-
-Auto-assigned reviewers: @airbnb/product-excellence
