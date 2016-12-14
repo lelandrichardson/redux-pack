@@ -112,7 +112,6 @@ Often times we want to log whether an action succeeded or not etc. We are able t
 export function loadFoo(id) {
   return dispatch => {
     dispatch(loadFooStart());
-    dispatch(removeToast(LOAD_FOO_API_ERROR));
     Api.getFoo(id).then(response => {
       dispatch(loadFooSucceeded(response);
       logSuccess(response);
