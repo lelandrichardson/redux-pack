@@ -42,7 +42,7 @@ function safeMap(state, fn, action, name) {
 }
 
 function handle(startingState, action, handlers) {
-  if (__DEV__) {
+  if (process.env.NODE_ENV === 'development') {
     verifyHandlers(handlers, action);
   }
   const { meta } = action;
