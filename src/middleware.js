@@ -23,9 +23,16 @@ function handleEventHook(meta, hook, ...args) {
   }
 }
 
-function handlePromise(dispatch, getState, action) {
-  const { promise, type, payload, meta } = action;
+function removePromiseFromMeta(originalMeta) {
+  if (!originalMeta) return undefined;
+  // eslint-disable-next-line no-unused-vars
+  const { promise, ...meta } = originalMeta;
+  return meta;
+}
 
+function handlePromise(dispatch, getState, action, promise) {
+  const { type, payload, meta } = action;
+  const metaWithoutPromise = removePromiseFromMeta(meta);
   // it is sometimes useful to be able to track the actions and associated promise lifecycle with a
   // sort of unique identifier. This is that.
   const transactionId = uuid();
@@ -35,7 +42,7 @@ function handlePromise(dispatch, getState, action) {
     type,
     payload,
     meta: {
-      ...meta,
+      ...metaWithoutPromise,
       [KEY.LIFECYCLE]: LIFECYCLE.START,
       [KEY.TRANSACTION]: transactionId,
     },
@@ -47,14 +54,14 @@ function handlePromise(dispatch, getState, action) {
       type,
       payload: data,
       meta: {
-        ...meta,
+        ...metaWithoutPromise,
         startPayload,
         [KEY.LIFECYCLE]: LIFECYCLE.SUCCESS,
         [KEY.TRANSACTION]: transactionId,
       },
     });
-    handleEventHook(meta, 'onSuccess', data, getState);
-    handleEventHook(meta, 'onFinish', true, getState);
+    handleEventHook(metaWithoutPromise, 'onSuccess', data, getState);
+    handleEventHook(metaWithoutPromise, 'onFinish', true, getState);
   };
 
   const failure = error => {
@@ -63,14 +70,14 @@ function handlePromise(dispatch, getState, action) {
       payload: error,
       error: true,
       meta: {
-        ...meta,
+        ...metaWithoutPromise,
         startPayload,
         [KEY.LIFECYCLE]: LIFECYCLE.FAILURE,
         [KEY.TRANSACTION]: transactionId,
       },
     });
-    handleEventHook(meta, 'onFailure', error, getState);
-    handleEventHook(meta, 'onFinish', false, getState);
+    handleEventHook(metaWithoutPromise, 'onFailure', error, getState);
+    handleEventHook(metaWithoutPromise, 'onFinish', false, getState);
   };
 
   // return the promise. In this case, when users dispatch an action with a promise
@@ -90,8 +97,10 @@ const middleware = store => next => action => {
 
   // this is the convention-based promise middleware. Ideally, all "async actions" would go through
   // this pathway.
-  if (isPromise(action.promise)) {
-    return handlePromise(store.dispatch, store.getState, action);
+
+  const promise = (action.meta && action.meta.promise) || action.promise;
+  if (isPromise(promise)) {
+    return handlePromise(store.dispatch, store.getState, action, promise);
   }
 
   // this is the "vanilla redux" pathway. These are plain old actions that will get sent to reducers

@@ -73,7 +73,9 @@ export const LOAD_FOO = 'LOAD_FOO';
 export function loadFoo(id) {
   return {
     type: LOAD_FOO,
-    promise: Api.getFoo(id),
+    meta: {
+      promise: Api.getFoo(id),
+    },
   };
 }
 ```
@@ -127,8 +129,8 @@ export function loadFoo(id) {
 export function loadFoo(id) {
   return {
     type: LOAD_FOO,
-    promise: Api.getFoo(id),
     meta: {
+      promise: Api.getFoo(id),
       onSuccess: (response) => logSuccess(response)
     },
   };
