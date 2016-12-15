@@ -1,11 +1,5 @@
+import uuid from 'uuid';
 import { KEY, LIFECYCLE } from './constants';
-
-let i = 0;
-
-const uuid = () => {
-  i += 1;
-  return `.p${i}`;
-};
 
 function isPromise(obj) {
   return !!obj && typeof obj.then === 'function';
@@ -28,7 +22,7 @@ function handlePromise(dispatch, getState, action) {
 
   // it is sometimes useful to be able to track the actions and associated promise lifecycle with a
   // sort of unique identifier. This is that.
-  const transactionId = uuid();
+  const transactionId = uuid.v4();
   const startPayload = payload;
 
   dispatch({

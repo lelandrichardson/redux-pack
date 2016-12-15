@@ -34,7 +34,8 @@
   },
   "dependencies": {
     "deline": "^1.0.2",
-    "invariant": "^2.2.2"
+    "invariant": "^2.2.2",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
