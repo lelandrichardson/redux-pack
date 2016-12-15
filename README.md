@@ -232,7 +232,7 @@ You might want to add side effects (like sending analytics events or navigate to
 Here are the available hooks and their associated payload:
 
 * `onStart`, called with the initial action `payload` value
-* `onFinnish`, called with `true` if the promise resolved, `false` otherwise
+* `onFinish`, called with `true` if the promise resolved, `false` otherwise
 * `onSuccess`, called with the promise resolution value
 * `onFailure`, called with the promise error
 
