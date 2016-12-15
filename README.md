@@ -41,7 +41,7 @@ In the reducer, you would handle each action individually in your reducer:
 export function fooReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case LOAD_FOO_STATED:
+    case LOAD_FOO_STARTED:
       return state
         .set('isLoading', true)
         .set('fooError', null);
