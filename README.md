@@ -245,7 +245,7 @@ import { doFoo } from '../api/foo';
 export function userDoesFoo() {
   return {
     type: DO_FOO,
-    promise: getFoo(),
+    promise: doFoo(),
     meta: {
       onSuccess: (result, getState) => {
         const userId = getState().currentUser.id;
