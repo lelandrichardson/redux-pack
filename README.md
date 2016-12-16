@@ -109,16 +109,17 @@ import { handle } from 'redux-pack';
 export function fooReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case LOAD_FOO: return handle(state, action, {
-      start: s => ({
-        ...s,
-        isLoading: true,
-        fooError: null
-      }),
-      finish: s => ({ ...s, isLoading: false }),
-      failure: s => ({ ...s, fooError: payload }),
-      success: s => ({ ...s, foo: payload }),
-    });
+    case LOAD_FOO:
+      return handle(state, action, {
+        start: s => ({
+          ...s,
+          isLoading: true,
+          fooError: null
+        }),
+        finish: s => ({ ...s, isLoading: false }),
+        failure: s => ({ ...s, fooError: payload }),
+        success: s => ({ ...s, foo: payload }),
+      });
     default:
       return state;
   }
@@ -223,13 +224,14 @@ const initialState = {
 export function fooReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case LOAD_FOO: return handle(state, action, {
-      start: s => ({ ...s, isLoading: true, error: null, foo: null })
-      finish: s => ({ ...s, isLoading: false }),
-      failure: s => ({ ...s, error: payload })),
-      success: s => ({ ...s, foo: payload }),
-      always: s => s, // unnecessary, for the sake of example
-    });
+    case LOAD_FOO:
+      return handle(state, action, {
+        start: s => ({ ...s, isLoading: true, error: null, foo: null })
+        finish: s => ({ ...s, isLoading: false }),
+        failure: s => ({ ...s, error: payload })),
+        success: s => ({ ...s, foo: payload }),
+        always: s => s, // unnecessary, for the sake of example
+      });
     default:
       return state;
   }
