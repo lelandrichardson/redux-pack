@@ -69,7 +69,18 @@ export function fooReducer(state = initialState, action) {
 ```
 
 
-**Note:** The example uses `{ ...state }` syntax that is called [Object rest spread properties](https://github.com/sebmarkbage/ecmascript-rest-spread).
+**Note:** The example uses `{ ...state }` syntax that is called [Object rest spread properties](https://github.com/sebmarkbage/ecmascript-rest-spread). If you'd prefer the API of [Immutable.js](https://facebook.github.io/immutable-js/), you could write code like the following:
+
+```js
+switch (type) {
+  case LOAD_FOO_STARTED:
+    return state
+      .set('isLoading', true)
+      .set('fooError', null);
+  case LOAD_FOO_SUCCESS:
+    // ...
+}
+```
 
 ### Data fetching with redux-pack (new way)
 
