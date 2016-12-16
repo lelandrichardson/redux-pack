@@ -69,6 +69,8 @@ export function fooReducer(state = initialState, action) {
 ```
 
 
+**Note:** The example uses `{ ...state }` syntax that is called [Object rest spread properties](https://github.com/sebmarkbage/ecmascript-rest-spread).
+
 ### Data fetching with redux-pack (new way)
 
 With redux-pack, we only need to define a single action constant for the entire promise lifecycle, and then return the promise directly with a `promise` namespace specified:
