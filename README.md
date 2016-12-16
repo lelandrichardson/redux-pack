@@ -38,29 +38,49 @@ export function loadFoo(id) {
 ```
 
 In the reducer, you would handle each action individually in your reducer:
+
 ```js
 // reducer.js
 export function fooReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case LOAD_FOO_STARTED:
-      return state
-        .set('isLoading', true)
-        .set('fooError', null);
+      return {
+        ...state,
+        isLoading: true,
+        fooError: null
+      };
     case LOAD_FOO_SUCCESS:
-      return state
-        .set('isLoading', false)
-        .set('foo', payload);
+      return {
+        ...state,
+        isLoading: false,
+        foo: payload
+      };
     case LOAD_FOO_FAILED:
-      return state
-        .set('isLoading', false)
-        .set('fooError', payload);
+      return {
+        ...state,
+        isLoading: false,
+        fooError: payload
+      };
     default:
       return state;
   }
 }
 ```
 
+
+**Note:** The example uses `{ ...state }` syntax that is called [Object rest spread properties](https://github.com/sebmarkbage/ecmascript-rest-spread). If you'd prefer the API of [Immutable.js](https://facebook.github.io/immutable-js/), you could write code like the following:
+
+```js
+switch (type) {
+  case LOAD_FOO_STARTED:
+    return state
+      .set('isLoading', true)
+      .set('fooError', null);
+  case LOAD_FOO_SUCCESS:
+    // ...
+}
+```
 
 ### Data fetching with redux-pack (new way)
 
@@ -81,6 +101,7 @@ export function loadFoo(id) {
 ```
 
 In the reducer, you handle the action with redux-pack's `handle` function, where you can specify several smaller "reducer" functions for each lifecycle. `finish` is called for both resolving/rejecting, `start` is called at the beginning, `success` is called on resolve, `failure` is called on reject, and `always` is called for all of them.
+
 ```js
 // reducer.js
 import { handle } from 'redux-pack';
@@ -88,14 +109,17 @@ import { handle } from 'redux-pack';
 export function fooReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case LOAD_FOO: return handle(state, action, {
-      start: s => s
-        .set('isLoading', true)
-        .set('fooError', null),
-      finish: s => s.set('isLoading', false),
-      failure: s => s.set('fooError', payload),
-      success: s => s.set('foo', payload),
-    });
+    case LOAD_FOO:
+      return handle(state, action, {
+        start: s => ({
+          ...s,
+          isLoading: true,
+          fooError: null
+        }),
+        finish: s => ({ ...s, isLoading: false }),
+        failure: s => ({ ...s, fooError: payload }),
+        success: s => ({ ...s, foo: payload }),
+      });
     default:
       return state;
   }
@@ -200,13 +224,14 @@ const initialState = {
 export function fooReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case LOAD_FOO: return handle(state, action, {
-      start: s => ({ ...s, isLoading: true, error: null, foo: null })
-      finish: s => ({ ...s, isLoading: false }),
-      failure: s => ({ ...s, error: payload })),
-      success: s => ({ ...s, foo: payload }),
-      always: s => s, // unnecessary, for the sake of example
-    });
+    case LOAD_FOO:
+      return handle(state, action, {
+        start: s => ({ ...s, isLoading: true, error: null, foo: null })
+        finish: s => ({ ...s, isLoading: false }),
+        failure: s => ({ ...s, error: payload })),
+        success: s => ({ ...s, foo: payload }),
+        always: s => s, // unnecessary, for the sake of example
+      });
     default:
       return state;
   }
@@ -219,6 +244,8 @@ export function loadFoo() {
   }
 }
 ```
+
+**Note:** The example uses `{ ...state }` syntax that is called [Object rest spread properties](https://github.com/sebmarkbage/ecmascript-rest-spread).
 
 ### Adding side-effects with event hooks
 
