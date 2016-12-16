@@ -245,6 +245,8 @@ export function loadFoo() {
 }
 ```
 
+**Note:** The example uses `{ ...state }` syntax that is called [Object rest spread properties](https://github.com/sebmarkbage/ecmascript-rest-spread).
+
 ### Adding side-effects with event hooks
 
 You might want to add side effects (like sending analytics events or navigate to different views) based on promise results.
