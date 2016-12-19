@@ -29,11 +29,10 @@
   },
   "homepage": "https://github.com/lelandrichardson/redux-pack#readme",
   "peerDependencies": {
-    "redux": "*",
-    "normalizr": "*"
+    "redux": "*"
   },
   "dependencies": {
-    "deline": "^1.0.2",
+    "deline": "^1.0.4",
     "invariant": "^2.2.2",
     "uuid": "^3.0.1"
   },
