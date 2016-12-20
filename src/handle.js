@@ -22,7 +22,7 @@ function verifyHandlers(handlers, action) {
 function safeMap(state, fn, action, name) {
   switch (typeof fn) {
     case 'function': {
-      const result = fn(state);
+      const result = fn(state, action);
       invariant(result !== undefined, deline`
         The ${name} handler for action ${action.type} is expected to return a new state object.
       `);
