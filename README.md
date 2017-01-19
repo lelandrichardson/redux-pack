@@ -286,3 +286,39 @@ export function userDoesFoo() {
   }
 }
 ```
+
+
+
+### Testing
+
+At the moment, testing reducers and action creators with `redux-pack` does 
+require understanding a little bit about its implementation. The `handle`
+method uses a special `KEY.LIFECICLE` property on the `meta` object on the
+action that denotes the lifecycle of the promise being handled.
+
+Right now it is suggested to make a simple helper method to make testing
+easier. Simple test code might look something like this:
+
+```js
+import { LIFECYCLE, KEY } from 'redux-pack';
+import FooReducer from '../path/to/FooReducer';
+
+// this utility method will make an action that redux pack understands
+function makePackAction(lifecycle, { type, payload, meta={} }) {
+  return {
+    type,
+    payload,
+    meta: {
+      ...meta,
+      [KEY.LIFECYCLE]: lifecycle,
+    },
+  }
+}
+
+// your test code would then look something like...
+const initialState = { ... };
+const expectedEndState = { ... };
+const action = makePackAction(LIFECYCLE.START, { type: 'FOO', payload: { ... } });
+const endState = FooReducer(initialState, action);
+assertDeepEqual(endState, expectedEndState);
+```
