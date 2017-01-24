@@ -10,7 +10,7 @@ This can be problematic because we are treating several dispatches as all part o
 
 `redux-pack` helps prevent us from making these mistakes, as it doesn't give us the power of a `dispatch` function, but allows us to do all of the things we were doing before.
 
-To give you some more context into the changes, Here are some examples/information about the old way and new way of doing things below:
+To give you some more context into the changes, here are some examples/information about the old way and new way of doing things below:
 
 Ready to use it? Jump straight to the [How-To and API doc](#how-to)
 
