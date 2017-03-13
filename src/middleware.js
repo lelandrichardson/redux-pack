@@ -49,6 +49,7 @@ function handlePromise(dispatch, getState, action) {
     });
     handleEventHook(meta, 'onSuccess', data, getState);
     handleEventHook(meta, 'onFinish', true, getState);
+    return { payload: data };
   };
 
   const failure = error => {
@@ -65,6 +66,7 @@ function handlePromise(dispatch, getState, action) {
     });
     handleEventHook(meta, 'onFailure', error, getState);
     handleEventHook(meta, 'onFinish', false, getState);
+    return { error: true, payload: error };
   };
 
   // return the promise. In this case, when users dispatch an action with a promise
