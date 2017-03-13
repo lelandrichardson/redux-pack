@@ -1,6 +1,6 @@
 {
   "name": "redux-pack",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Sensible promise handling and middleware for redux",
   "main": "lib/index.js",
   "scripts": {
