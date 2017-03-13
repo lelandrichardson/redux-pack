@@ -111,14 +111,14 @@ export function fooReducer(state = initialState, action) {
   switch (type) {
     case LOAD_FOO:
       return handle(state, action, {
-        start: s => ({
-          ...s,
+        start: prevState => ({
+          ...prevState,
           isLoading: true,
           fooError: null
         }),
-        finish: s => ({ ...s, isLoading: false }),
-        failure: s => ({ ...s, fooError: payload }),
-        success: s => ({ ...s, foo: payload }),
+        finish: prevState => ({ ...prevState, isLoading: false }),
+        failure: prevState => ({ ...prevState, fooError: payload }),
+        success: prevState => ({ ...prevState, foo: payload }),
       });
     default:
       return state;
@@ -226,11 +226,11 @@ export function fooReducer(state = initialState, action) {
   switch (type) {
     case LOAD_FOO:
       return handle(state, action, {
-        start: s => ({ ...s, isLoading: true, error: null, foo: null }),
-        finish: s => ({ ...s, isLoading: false }),
-        failure: s => ({ ...s, error: payload }),
-        success: s => ({ ...s, foo: payload }),
-        always: s => s, // unnecessary, for the sake of example
+        start: prevState => ({ ...prevState, isLoading: true, error: null, foo: null }),
+        finish: prevState => ({ ...prevState, isLoading: false }),
+        failure: prevState => ({ ...prevState, error: payload }),
+        success: prevState => ({ ...prevState, foo: payload }),
+        always: prevState => prevState, // unnecessary, for the sake of example
       });
     default:
       return state;
