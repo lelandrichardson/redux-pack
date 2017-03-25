@@ -293,7 +293,7 @@ export function userDoesFoo() {
 
 At the moment, testing reducers and action creators with `redux-pack` does 
 require understanding a little bit about its implementation. The `handle`
-method uses a special `KEY.LIFECICLE` property on the `meta` object on the
+method uses a special `KEY.LIFECYCLE` property on the `meta` object on the
 action that denotes the lifecycle of the promise being handled.
 
 Right now it is suggested to make a simple helper method to make testing
