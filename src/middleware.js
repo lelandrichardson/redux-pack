@@ -77,7 +77,7 @@ function handlePromise(dispatch, getState, action) {
   return promise.then(success, failure);
 }
 
-const middleware = store => next => action => {
+const middleware = ({ dispatch, getState }) => next => action => {
   // a common use case for redux-thunk is to conditionally dispatch an action. By allowing for null,
   // we satisfy this use case without people having to use redux-thunk.
   if (action == null) {
@@ -87,7 +87,7 @@ const middleware = store => next => action => {
   // this is the convention-based promise middleware. Ideally, all "async actions" would go through
   // this pathway.
   if (isPromise(action.promise)) {
-    return handlePromise(store.dispatch, store.getState, action);
+    return handlePromise(dispatch, getState, action);
   }
 
   // this is the "vanilla redux" pathway. These are plain old actions that will get sent to reducers
