@@ -19,7 +19,7 @@ function verifyHandlers(handlers, action) {
   });
 }
 
-function safeMap(state, fn, action, name) {
+function safeMap(state, action, fn, action, name) {
   switch (typeof fn) {
     case 'function': {
       const result = fn(state, action);
@@ -59,21 +59,21 @@ function handle(startingState, action, handlers) {
   let state = startingState;
   switch (lifecycle) {
     case LIFECYCLE.START:
-      state = safeMap(state, handlers.start, action, 'start');
+      state = safeMap(state, action, handlers.start, action, 'start');
       break;
     case LIFECYCLE.SUCCESS:
-      state = safeMap(state, handlers.success, action, 'success');
-      state = safeMap(state, handlers.finish, action, 'finish');
+      state = safeMap(state, action, handlers.success, action, 'success');
+      state = safeMap(state, action, handlers.finish, action, 'finish');
       break;
     case LIFECYCLE.FAILURE:
-      state = safeMap(state, handlers.failure, action, 'failure');
-      state = safeMap(state, handlers.finish, action, 'finish');
+      state = safeMap(state, action, handlers.failure, action, 'failure');
+      state = safeMap(state, action, handlers.finish, action, 'finish');
       break;
     default:
       // do nothing
       break;
   }
-  state = safeMap(state, handlers.always, action, 'always');
+  state = safeMap(state, action, handlers.always, action, 'always');
   return state;
 }
 
