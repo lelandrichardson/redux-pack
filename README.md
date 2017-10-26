@@ -184,7 +184,7 @@ The `redux-pack` middleware is the heart of `redux-pack`. As the following examp
 import { createStore, applyMiddleware } from 'redux'
 import { middleware as reduxPackMiddleware } from 'redux-pack'
 import thunk from 'redux-thunk'
-import createLogger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import rootReducer from './reducer'
 
 const logger = createLogger()
