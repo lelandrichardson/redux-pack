@@ -69,6 +69,10 @@ function handle(startingState, action, handlers) {
       state = safeMap(state, handlers.failure, action, 'failure');
       state = safeMap(state, handlers.finish, action, 'finish');
       break;
+    case LIFECYCLE.CANCEL:
+      state = safeMap(state, handlers.cancel, action, 'cancel');
+      state = safeMap(state, handlers.finish, action, 'finish');
+      break;
     default:
       // do nothing
       break;

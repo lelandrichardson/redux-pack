@@ -1,4 +1,5 @@
 import uuid from 'uuid';
+import makeTrashable from 'trashable';
 import { KEY, LIFECYCLE } from './constants';
 
 function isPromise(obj) {
@@ -18,7 +19,7 @@ function handleEventHook(meta, hook, ...args) {
 }
 
 function handlePromise(dispatch, getState, action) {
-  const { promise, type, payload, meta } = action;
+  const { cancelable, promise, type, payload, meta } = action;
 
   // it is sometimes useful to be able to track the actions and associated promise lifecycle with a
   // sort of unique identifier. This is that.
@@ -52,6 +53,21 @@ function handlePromise(dispatch, getState, action) {
     return { payload: data };
   };
 
+  const cancel = () => {
+    dispatch({
+      type,
+      payload: null,
+      meta: {
+        ...meta,
+        startPayload,
+        [KEY.LIFECYCLE]: LIFECYCLE.CANCEL,
+        [KEY.TRANSACTION]: transactionId,
+      },
+    });
+    handleEventHook(meta, 'onCancel', false, getState);
+    handleEventHook(meta, 'onFinish', false, getState);
+  };
+
   const failure = error => {
     dispatch({
       type,
@@ -68,6 +84,23 @@ function handlePromise(dispatch, getState, action) {
     handleEventHook(meta, 'onFinish', false, getState);
     return { error: true, payload: error };
   };
+
+  if (cancelable) {
+    let cancelablePromise = makeTrashable(promise);
+    return {
+      promise: cancelablePromise.then(success, failure),
+      cancel() {
+        if (cancelablePromise) {
+          // Trash/cancel the promise
+          cancelablePromise.trash();
+          // Dereference
+          cancelablePromise = null;
+        }
+        // Call the redux-pack cancel event
+        cancel();
+      },
+    };
+  }
 
   // return the promise. In this case, when users dispatch an action with a promise
   // payload, they can `.then` it, since it will return a promise.

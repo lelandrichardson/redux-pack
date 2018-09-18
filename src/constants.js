@@ -5,6 +5,7 @@ const KEY = {
 
 const LIFECYCLE = {
   START: 'start',
+  CANCEL: 'cancel',
   SUCCESS: 'success',
   FAILURE: 'failure',
 };
