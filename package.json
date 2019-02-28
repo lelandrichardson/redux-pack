@@ -4,7 +4,7 @@
   "description": "Sensible promise handling and middleware for redux",
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "test": "npm run lint",
     "lint": "eslint ./",
     "build": "babel src --out-dir lib"
@@ -33,21 +33,21 @@
   },
   "dependencies": {
     "deline": "^1.0.4",
-    "invariant": "^2.2.2",
-    "uuid": "^3.0.1"
+    "invariant": "^2.2.4",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.20.0",
-    "babel-eslint": "^6.1.0",
-    "babel-preset-react-native": "^1.9.0",
-    "eslint": "^3.11.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prefer-object-spread": "^1.0.0",
-    "eslint-plugin-react": "^6.8.0",
+    "eslint-plugin-react": "^7.12.4",
+    "metro-react-native-babel-preset": "^0.52.0",
     "normalizr": "^2.3.0",
-    "redux": "^3.6.0"
+    "redux": "^4.0.1"
   }
 }
