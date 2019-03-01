@@ -38,5 +38,3 @@ jspm_packages
 
 .DS_Store
 lib/
-
-package-lock.json
