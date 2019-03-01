@@ -4,7 +4,7 @@
   "description": "Sensible promise handling and middleware for redux",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "npm run build",
+    "prepublish": "npm run build",
     "test": "npm run lint",
     "lint": "eslint ./",
     "build": "babel src --out-dir lib"
