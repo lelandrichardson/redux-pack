@@ -18,7 +18,9 @@ function handleEventHook(meta, hook, ...args) {
 }
 
 function handlePromise(dispatch, getState, action) {
-  const { promise, type, payload, meta } = action;
+  const {
+    promise, type, payload, meta,
+  } = action;
 
   // it is sometimes useful to be able to track the actions and associated promise lifecycle with a
   // sort of unique identifier. This is that.
@@ -93,6 +95,5 @@ const middleware = store => next => action => {
   // this is the "vanilla redux" pathway. These are plain old actions that will get sent to reducers
   return next(action);
 };
-
 
 module.exports = middleware;

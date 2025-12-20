@@ -77,5 +77,4 @@ function handle(startingState, action, handlers) {
   return state;
 }
 
-
 module.exports = handle;
