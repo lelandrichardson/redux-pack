@@ -1,43 +1,24 @@
 {
   "root": true,
-  "parser": "babel-eslint",
-  "extends": "airbnb",
+  "parser": "@babel/eslint-parser",
+  "extends": "airbnb-base",
   "env": {
-    "node": true
+    "node": true,
+    "jest": true
   },
-  "plugins": [
-    "prefer-object-spread"
-  ],
-  "ecmaFeatures": {
-    "arrowFunctions": true,
-    "blockBindings": true,
-    "classes": true,
-    "defaultParams": true,
-    "destructuring": true,
-    "forOf": true,
-    "generators": false,
-    "modules": true,
-    "experimentalObjectRestSpread": true,
-    "objectLiteralComputedProperties": true,
-    "objectLiteralDuplicateProperties": false,
-    "objectLiteralShorthandMethods": true,
-    "objectLiteralShorthandProperties": true,
-    "restParams": true,
-    "spread": true,
-    "superInFunctions": true,
-    "templateStrings": true
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "requireConfigFile": true
   },
   "rules": {
     "new-cap": 0,
     "no-use-before-define": 0,
     "arrow-body-style": 0,
-    // triple equals is required except for when comparing with null
     "eqeqeq": [2, "allow-null"],
-    // Allow console methods, which get removed during build process
     "no-console": 0,
-    // Disable `arrow-parens` because it conflicts with Flow.
     "arrow-parens": 0,
-    "prefer-object-spread/prefer-object-spread": 2
+    "object-shorthand": ["error", "always"]
   },
   "globals": {
     "__DEV__": true
