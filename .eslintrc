@@ -41,5 +41,13 @@
   },
   "globals": {
     "__DEV__": true
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*.js", "**/*.test.js", "**/*.spec.js"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }
